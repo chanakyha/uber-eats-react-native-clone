@@ -38,15 +38,18 @@ export const localRestaurants = [
 export default function RestraurantItems({ restaurantsData }) {
   return (
     <TouchableOpacity activeOpacity={1} style={{ marginBottom: 30 }}>
-      {restaurantsData.map((resturant, key) => (
-        <View
-          key={key}
-          style={{ marginTop: 10, backgroundColor: "#fff", padding: 15 }}
-        >
-          <RestraurantImage image={resturant.imageUrl} />
-          <RestraurantInfo rating={resturant.rating} name={resturant.name} />
-        </View>
-      ))}
+      {restaurantsData &&
+        restaurantsData.map((resturant, key) => (
+          <View
+            key={key}
+            style={{ marginTop: 10, backgroundColor: "#fff", padding: 15 }}
+          >
+            <RestraurantImage
+              image={resturant.image_url || resturant.imageUrl}
+            />
+            <RestraurantInfo rating={resturant.rating} name={resturant.name} />
+          </View>
+        ))}
     </TouchableOpacity>
   );
 }
