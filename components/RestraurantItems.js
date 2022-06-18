@@ -1,44 +1,17 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import React from "react";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-
-export const localRestaurants = [
-  {
-    id: 1,
-    name: "Roadside Restaurant",
-    imageUrl:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqI6O0wsQI5Jc6Q6Lwr7wzAUyCtQ1O5AW-jg&usqp=CAU",
-    categories: ["Cafe", "Bar"],
-    price: "$$",
-    reviews: 1344,
-    rating: 4.5,
-  },
-  {
-    id: 1,
-    name: "Roadside Restaurant",
-    imageUrl:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqI6O0wsQI5Jc6Q6Lwr7wzAUyCtQ1O5AW-jg&usqp=CAU",
-    categories: ["Cafe", "Bar"],
-    price: "$$",
-    reviews: 1344,
-    rating: 4.5,
-  },
-  {
-    id: 1,
-    name: "Roadside Restaurant",
-    imageUrl:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqI6O0wsQI5Jc6Q6Lwr7wzAUyCtQ1O5AW-jg&usqp=CAU",
-    categories: ["Cafe", "Bar"],
-    price: "$$",
-    reviews: 1344,
-    rating: 4.5,
-  },
-];
 
 export default function RestraurantItems({ restaurantsData }) {
   return (
     <TouchableOpacity activeOpacity={1} style={{ marginBottom: 30 }}>
-      {restaurantsData &&
+      {restaurantsData ? (
         restaurantsData.map((resturant, key) => (
           <View
             key={key}
@@ -49,7 +22,20 @@ export default function RestraurantItems({ restaurantsData }) {
             />
             <RestraurantInfo rating={resturant.rating} name={resturant.name} />
           </View>
-        ))}
+        ))
+      ) : (
+        <View
+          style={{
+            height: "100%",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <ActivityIndicator size={"large"} color="#000" />
+        </View>
+      )}
     </TouchableOpacity>
   );
 }
