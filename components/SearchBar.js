@@ -14,7 +14,6 @@ export default function SearchBar({ city, setCity }) {
           alignItems: "center",
           marginRight: 10,
           flex: 1,
-          justifyContent: "center",
         }}
       >
         <View style={{ marginLeft: 10 }}>
@@ -26,9 +25,9 @@ export default function SearchBar({ city, setCity }) {
             backgroundColor: "#eee",
             borderRadius: 20,
             fontWeight: "700",
-            marginTop: 7,
             flex: 1,
             paddingHorizontal: 8,
+            height: "100%",
           }}
           onChangeText={(text) => setCity(text)}
           placeholder="Search"
