@@ -29,6 +29,7 @@ export default function SearchBar({ city, setCity }) {
             paddingHorizontal: 8,
             height: "100%",
           }}
+          value={city}
           onChangeText={(text) => setCity(text)}
           placeholder="Search"
         />
