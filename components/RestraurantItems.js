@@ -34,6 +34,7 @@ export default function RestraurantItems({ restaurantsData }) {
           }}
         >
           <ActivityIndicator size={"large"} color="#000" />
+          <Text>Noting Found !! at the moment</Text>
         </View>
       )}
     </TouchableOpacity>

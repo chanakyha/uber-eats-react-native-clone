@@ -1,12 +1,9 @@
 import { View, Text, TouchableOpacity, TextInput } from "react-native";
-import React, { useState } from "react";
-import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import React from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AntDesign from "react-native-vector-icons/AntDesign";
 
-export default function SearchBar() {
-  const [city, setCity] = useState("San Fransisco");
-
+export default function SearchBar({ city, setCity }) {
   return (
     <View style={{ marginTop: 15, flexDirection: "row" }}>
       <View
@@ -31,6 +28,7 @@ export default function SearchBar() {
             fontWeight: "700",
             marginTop: 7,
             flex: 1,
+            paddingHorizontal: 8,
           }}
           onChangeText={(text) => setCity(text)}
           placeholder="Search"
