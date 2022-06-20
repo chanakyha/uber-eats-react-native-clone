@@ -69,8 +69,8 @@ export default function MenuItems() {
               iconStyle={{ borderColor: "lightgray", borderRadius: 0 }}
               fillColor="green"
             />
-            <FoodInfo food={foods[0]} />
-            <FoodImage food={foods[0]} />
+            <FoodInfo food={food} />
+            <FoodImage food={food} />
           </View>
           <Divider
             width={0.5}
