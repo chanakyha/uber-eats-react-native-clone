@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import React from "react";
 import { Divider } from "react-native-elements";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
+import { useDispatch, useSelector } from "react-redux";
 
 const foods = [
   {
@@ -13,36 +14,36 @@ const foods = [
       "https://media.istockphoto.com/photos/tandoori-chicken-whole-with-naan-and-raita-picture-id953514746?k=20&m=953514746&s=612x612&w=0&h=We9WAV6sG3DQaVaAESUlYlXt93yyQojSwobNuyhlXns=",
   },
   {
-    title: "Tandoori Chicken",
+    title: "French Fries",
     description:
       "Amazing Indian Dish with tenderloin chicken off sizzling sauce of mayoo",
-    price: "$19.20",
+    price: "$8.50",
     image:
-      "https://media.istockphoto.com/photos/tandoori-chicken-whole-with-naan-and-raita-picture-id953514746?k=20&m=953514746&s=612x612&w=0&h=We9WAV6sG3DQaVaAESUlYlXt93yyQojSwobNuyhlXns=",
+      "https://www.thespruceeats.com/thmb/IHKuXcx3uUI1IWkM_cnnQdFH-zQ=/3485x2323/filters:fill(auto,1)/how-to-make-homemade-french-fries-2215971-hero-01-02f62a016f3e4aa4b41d0c27539885c3.jpg",
   },
   {
-    title: "Tandoori Chicken",
+    title: "Salsa Burger",
     description:
       "Amazing Indian Dish with tenderloin chicken off sizzling sauce of mayoo",
-    price: "$19.20",
+    price: "$28.80",
     image:
-      "https://media.istockphoto.com/photos/tandoori-chicken-whole-with-naan-and-raita-picture-id953514746?k=20&m=953514746&s=612x612&w=0&h=We9WAV6sG3DQaVaAESUlYlXt93yyQojSwobNuyhlXns=",
+      "https://media-cldnry.s-nbcnews.com/image/upload/newscms/2019_21/2870431/190524-classic-american-cheeseburger-ew-207p.jpg",
   },
   {
-    title: "Tandoori Chicken",
+    title: "Pizza",
     description:
       "Amazing Indian Dish with tenderloin chicken off sizzling sauce of mayoo",
-    price: "$19.20",
+    price: "$30.20",
     image:
-      "https://media.istockphoto.com/photos/tandoori-chicken-whole-with-naan-and-raita-picture-id953514746?k=20&m=953514746&s=612x612&w=0&h=We9WAV6sG3DQaVaAESUlYlXt93yyQojSwobNuyhlXns=",
+      "https://img.onmanorama.com/content/dam/mm/en/food/features/images/2021/10/17/pizza.jpg",
   },
   {
-    title: "Tandoori Chicken",
+    title: "Noodles",
     description:
       "Amazing Indian Dish with tenderloin chicken off sizzling sauce of mayoo",
-    price: "$19.20",
+    price: "$9.60",
     image:
-      "https://media.istockphoto.com/photos/tandoori-chicken-whole-with-naan-and-raita-picture-id953514746?k=20&m=953514746&s=612x612&w=0&h=We9WAV6sG3DQaVaAESUlYlXt93yyQojSwobNuyhlXns=",
+      "https://thechutneylife.com/wp-content/uploads/2017/09/Veg-Hakka-Noodles-The-Chutney-Life-4.jpg",
   },
 ];
 
@@ -59,7 +60,26 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function MenuItems() {
+export default function MenuItems({ restaurantName }) {
+  const dispatch = useDispatch();
+  const selectItem = (item, checkboxValue) => {
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: {
+        ...item,
+        restaurantName: restaurantName,
+        checkboxValue: checkboxValue,
+      },
+    });
+  };
+
+  const cartItems = useSelector(
+    (state) => state.cartReducer.selectedItems.items
+  );
+  const isFoodInCart = (food, cartItems) => {
+    return Boolean(cartItems.find((item) => item.title === food.title));
+  };
+
   return (
     <ScrollView showsVerticalScrollIndicator={0}>
       {foods.map((food, key) => (
@@ -68,6 +88,8 @@ export default function MenuItems() {
             <BouncyCheckbox
               iconStyle={{ borderColor: "lightgray", borderRadius: 0 }}
               fillColor="green"
+              onPress={(checkboxValue) => selectItem(food, checkboxValue)}
+              isChecked={isFoodInCart(food, cartItems)}
             />
             <FoodInfo food={food} />
             <FoodImage food={food} />
