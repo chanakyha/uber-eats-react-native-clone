@@ -8,20 +8,38 @@ import {
 import React from "react";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-export default function RestraurantItems({ restaurantsData }) {
+export default function RestraurantItems({ restaurantsData, navigation }) {
   return (
-    <TouchableOpacity activeOpacity={1} style={{ marginBottom: 30 }}>
+    <>
       {restaurantsData ? (
         restaurantsData.map((resturant, key) => (
-          <View
+          <TouchableOpacity
             key={key}
-            style={{ marginTop: 10, backgroundColor: "#fff", padding: 15 }}
+            activeOpacity={1}
+            style={{ marginBottom: 30 }}
+            onPress={() => {
+              navigation.navigate("RestaurantDetail", {
+                name: resturant.name,
+                image: resturant.image_url,
+                price: resturant.price,
+                reviews: resturant.review_count,
+                catagories: resturant.categories,
+                rating: resturant.rating,
+              });
+            }}
           >
-            <RestraurantImage
-              image={resturant.image_url || resturant.imageUrl}
-            />
-            <RestraurantInfo rating={resturant.rating} name={resturant.name} />
-          </View>
+            <View
+              style={{ marginTop: 10, backgroundColor: "#fff", padding: 15 }}
+            >
+              <RestraurantImage
+                image={resturant.image_url || resturant.imageUrl}
+              />
+              <RestraurantInfo
+                rating={resturant.rating}
+                name={resturant.name}
+              />
+            </View>
+          </TouchableOpacity>
         ))
       ) : (
         <View
@@ -37,7 +55,7 @@ export default function RestraurantItems({ restaurantsData }) {
           <Text style={{ marginLeft: 5 }}>Noting Found at the moment !!</Text>
         </View>
       )}
-    </TouchableOpacity>
+    </>
   );
 }
 
