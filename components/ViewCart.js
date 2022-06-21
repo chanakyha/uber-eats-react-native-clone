@@ -2,9 +2,11 @@ import { View, Text, TouchableOpacity, StyleSheet, Modal } from "react-native";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import OrderItem from "./OrderItem";
+import LottieView from "lottie-react-native";
 
 export default function ViewCart({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { items, restaurantName } = useSelector(
     (state) => state.cartReducer.selectedItems
@@ -50,13 +52,17 @@ export default function ViewCart({ navigation }) {
   });
 
   const checkOut = () => {
+    setLoading(true);
     setModalVisible(false);
-    navigation.navigate("OrderCompleted", {
-      restaurantName: restaurantName,
-      totalUSD: totalUSD,
-      total: total,
-      items: items,
-    });
+    setTimeout(() => {
+      setLoading(false);
+      navigation.navigate("OrderCompleted", {
+        restaurantName: restaurantName,
+        totalUSD: totalUSD,
+        total: total,
+        items: items,
+      });
+    }, 3000);
   };
 
   const CheckOutModalContent = () => (
@@ -158,6 +164,26 @@ export default function ViewCart({ navigation }) {
       ) : (
         <></>
       )}
+      {loading ? (
+        <View
+          style={{
+            backgroundColor: "#000",
+            position: "absolute",
+            opacity: 0.6,
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+            width: "100%",
+          }}
+        >
+          <LottieView
+            style={{ height: 200 }}
+            autoPlay
+            speed={3}
+            source={require("../assets/animations/scanner.json")}
+          />
+        </View>
+      ) : null}
     </>
   );
 }

@@ -6,44 +6,41 @@ import { useDispatch, useSelector } from "react-redux";
 
 const foodsDefault = [
   {
+    title: "Lasagna",
+    description: "With butter lettuce, tomato and sauce bechamel",
+    price: "$13.50",
+    image:
+      "https://www.modernhoney.com/wp-content/uploads/2019/08/Classic-Lasagna-14-scaled.jpg",
+  },
+  {
     title: "Tandoori Chicken",
     description:
-      "Amazing Indian Dish with tenderloin chicken off sizzling sauce of mayoo",
+      "Amazing Indian dish with tenderloin chicken off the sizzles 🔥",
     price: "$19.20",
-    image:
-      "https://media.istockphoto.com/photos/tandoori-chicken-whole-with-naan-and-raita-picture-id953514746?k=20&m=953514746&s=612x612&w=0&h=We9WAV6sG3DQaVaAESUlYlXt93yyQojSwobNuyhlXns=",
+    image: "https://i.ytimg.com/vi/BKxGodX9NGg/maxresdefault.jpg",
   },
   {
-    title: "French Fries",
+    title: "Chilaquiles",
     description:
-      "Amazing Indian Dish with tenderloin chicken off sizzling sauce of mayoo",
-    price: "$8.50",
+      "Chilaquiles with cheese and sauce. A delicious mexican dish 🇲🇽",
+    price: "$14.50",
     image:
-      "https://www.thespruceeats.com/thmb/IHKuXcx3uUI1IWkM_cnnQdFH-zQ=/3485x2323/filters:fill(auto,1)/how-to-make-homemade-french-fries-2215971-hero-01-02f62a016f3e4aa4b41d0c27539885c3.jpg",
+      "https://i2.wp.com/chilipeppermadness.com/wp-content/uploads/2020/11/Chilaquales-Recipe-Chilaquiles-Rojos-1.jpg",
   },
   {
-    title: "Salsa Burger",
+    title: "Chicken Caesar Salad",
     description:
-      "Amazing Indian Dish with tenderloin chicken off sizzling sauce of mayoo",
-    price: "$28.80",
+      "One can never go wrong with a chicken caesar salad. Healthy option with greens and proteins!",
+    price: "$21.50",
     image:
-      "https://media-cldnry.s-nbcnews.com/image/upload/newscms/2019_21/2870431/190524-classic-american-cheeseburger-ew-207p.jpg",
+      "https://images.themodernproper.com/billowy-turkey/production/posts/2019/Easy-italian-salad-recipe-10.jpg?w=1200&h=1200&q=82&fm=jpg&fit=crop&fp-x=0.5&fp-y=0.5&dm=1614096227&s=c0f63a30cef3334d97f9ecad14be51da",
   },
   {
-    title: "Pizza",
-    description:
-      "Amazing Indian Dish with tenderloin chicken off sizzling sauce of mayoo",
-    price: "$30.20",
+    title: "Lasagna",
+    description: "With butter lettuce, tomato and sauce bechamel",
+    price: "$13.50",
     image:
-      "https://img.onmanorama.com/content/dam/mm/en/food/features/images/2021/10/17/pizza.jpg",
-  },
-  {
-    title: "Noodles",
-    description:
-      "Amazing Indian Dish with tenderloin chicken off sizzling sauce of mayoo",
-    price: "$9.60",
-    image:
-      "https://thechutneylife.com/wp-content/uploads/2017/09/Veg-Hakka-Noodles-The-Chutney-Life-4.jpg",
+      "https://thestayathomechef.com/wp-content/uploads/2017/08/Most-Amazing-Lasagna-2-e1574792735811.jpg",
   },
 ];
 
