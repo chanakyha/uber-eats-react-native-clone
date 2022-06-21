@@ -4,7 +4,7 @@ import { Divider } from "react-native-elements";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { useDispatch, useSelector } from "react-redux";
 
-const foods = [
+const foodsDefault = [
   {
     title: "Tandoori Chicken",
     description:
@@ -60,7 +60,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function MenuItems({ restaurantName }) {
+export default function MenuItems({
+  restaurantName,
+  hideCheckBox,
+  marginLeft,
+  foods,
+}) {
   const dispatch = useDispatch();
   const selectItem = (item, checkboxValue) => {
     dispatch({
@@ -82,25 +87,55 @@ export default function MenuItems({ restaurantName }) {
 
   return (
     <ScrollView showsVerticalScrollIndicator={0}>
-      {foods.map((food, key) => (
-        <View key={key}>
-          <View style={styles.menuItem}>
-            <BouncyCheckbox
-              iconStyle={{ borderColor: "lightgray", borderRadius: 0 }}
-              fillColor="green"
-              onPress={(checkboxValue) => selectItem(food, checkboxValue)}
-              isChecked={isFoodInCart(food, cartItems)}
-            />
-            <FoodInfo food={food} />
-            <FoodImage food={food} />
-          </View>
-          <Divider
-            width={0.5}
-            orientation={"vertical"}
-            style={{ marginHorizontal: 20 }}
-          />
-        </View>
-      ))}
+      {foods
+        ? foods.map((food, key) => (
+            <View key={key}>
+              <View style={styles.menuItem}>
+                {hideCheckBox ? null : (
+                  <BouncyCheckbox
+                    iconStyle={{ borderColor: "lightgray", borderRadius: 0 }}
+                    fillColor="green"
+                    onPress={(checkboxValue) => selectItem(food, checkboxValue)}
+                    isChecked={isFoodInCart(food, cartItems)}
+                  />
+                )}
+                <FoodInfo food={food} />
+                <FoodImage
+                  food={food}
+                  marginLeft={marginLeft ? marginLeft : 0}
+                />
+              </View>
+              <Divider
+                width={0.5}
+                orientation={"vertical"}
+                style={{ marginHorizontal: 20 }}
+              />
+            </View>
+          ))
+        : foodsDefault.map((food, key) => (
+            <View key={key}>
+              <View style={styles.menuItem}>
+                {hideCheckBox ? null : (
+                  <BouncyCheckbox
+                    iconStyle={{ borderColor: "lightgray", borderRadius: 0 }}
+                    fillColor="green"
+                    onPress={(checkboxValue) => selectItem(food, checkboxValue)}
+                    isChecked={isFoodInCart(food, cartItems)}
+                  />
+                )}
+                <FoodInfo food={food} />
+                <FoodImage
+                  food={food}
+                  marginLeft={marginLeft ? marginLeft : 0}
+                />
+              </View>
+              <Divider
+                width={0.5}
+                orientation={"vertical"}
+                style={{ marginHorizontal: 20 }}
+              />
+            </View>
+          ))}
     </ScrollView>
   );
 }
@@ -113,11 +148,16 @@ const FoodInfo = ({ food }) => (
   </View>
 );
 
-const FoodImage = ({ food }) => (
+const FoodImage = ({ marginLeft, food }) => (
   <View>
     <Image
       source={{ uri: food.image }}
-      style={{ width: 100, height: 100, borderRadius: 8 }}
+      style={{
+        width: 100,
+        height: 100,
+        borderRadius: 8,
+        marginLeft: marginLeft,
+      }}
     />
   </View>
 );

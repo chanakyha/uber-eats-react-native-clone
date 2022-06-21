@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import OrderItem from "./OrderItem";
 
-export default function ViewCart() {
+export default function ViewCart({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
 
   const { items, restaurantName } = useSelector(
@@ -49,6 +49,16 @@ export default function ViewCart() {
     },
   });
 
+  const checkOut = () => {
+    setModalVisible(false);
+    navigation.navigate("OrderCompleted", {
+      restaurantName: restaurantName,
+      totalUSD: totalUSD,
+      total: total,
+      items: items,
+    });
+  };
+
   const CheckOutModalContent = () => (
     <>
       <View style={styles.modalContainer}>
@@ -72,7 +82,7 @@ export default function ViewCart() {
                 position: "relative",
                 padding: 13,
               }}
-              onPress={() => setModalVisible(false)}
+              onPress={checkOut}
             >
               <Text style={{ color: "#fff", fontSize: 20 }}>Checkout</Text>
               <Text
